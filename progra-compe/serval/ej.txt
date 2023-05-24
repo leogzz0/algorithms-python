@@ -1,0 +1,21 @@
+We calculate the arrival time of the first bus of route i after Serval reaches the bus station.
+If Serval reaches the station before the first bus of this route, the arrival time is s. 
+Otherwise, we need to find the first bus that arrives after Serval reaches the station. 
+We use the formula s + (math.ceil((t - s) / d) * d) to calculate the arrival time. math.ceil((t - s) / d) calculates the number of intervals between the first bus and the time when Serval reaches the station, and * d converts this to the time difference between the first bus and the arrival time.
+
+(t - s + d - 1) calculates the time difference between the time Serval reaches the bus station and the time of the first bus of the current route. We add d - 1 to this difference to ensure that we round up to the next multiple of d (i.e., we add 1 less than the interval between buses before dividing by the interval).
+// d performs integer division to calculate the number of intervals between the first bus and the time when Serval reaches the station. This gives us the number of intervals rounded up to the next integer.
+* d multiplies the number of intervals by the interval between buses to get the time of the next bus after Serval reaches the station. We add this to s to get the arrival time of the first bus after Serval reaches the station.
+Here's an example to illustrate this calculation:
+
+Suppose the first bus of the current route arrives at time s=6 and the interval between buses is d=4. Serval reaches the bus station at time t=9. The time difference between the first bus and Serval's arrival is (t - s) = (9 - 6) = 3.
+ We add d - 1 to this difference to get (3 + 4 - 1) = 6. We then perform integer division to get 6 // 4 = 1, which means that there is 1 interval between the first bus and Serval's arrival. 
+ We multiply this by d=4 to get 4, which is the time difference between the first bus and the next bus after Serval's arrival. Finally, we add this to s=6 to get the arrival time of the first bus after Serval's arrival, which is 10.
+
+ can you explain with this input
+ 5 5
+ 3 3
+ 2 5
+ 5 6
+ 4 9
+ 6 1
